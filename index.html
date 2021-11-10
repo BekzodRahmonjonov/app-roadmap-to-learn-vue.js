@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Основы Vue</title>
+    <link rel="stylesheet" href="theme.css" />
+  </head>
+  <body>
+
+  <div class="container" id="app">
+    <div class="card">
+      <h1>План по изучению Vue.js</h1>
+
+      <div class="steps">
+        <div class="steps-content" v-if="activeIndex === 1">
+          {{ steps[0].text }}
+        </div>
+        <div class="steps-content" v-if="activeIndex === 2">
+          {{ steps[1].text }}
+        </div>
+        <div class="steps-content" v-if="activeIndex === 3">
+          {{ steps[2].text }}
+        </div>
+        <div class="steps-content" v-if="activeIndex === 4">
+          {{ steps[3].text }}
+        </div>
+        <div class="steps-content" v-if="activeIndex === 5">
+          {{ steps[4].text }}
+        </div>
+        <ul class="steps-list">
+          <li :class="{
+            'steps-item active': activeIndex === 1,
+            'steps-item done': activeIndex > 1
+          }">
+            <span @click="activeIndex = 1">1</span> {{ steps[0].title }}</li>
+          <li :class="{
+            'steps-item active': activeIndex === 2,
+            'steps-item done': activeIndex > 2,
+            'steps-item': activeIndex < 2
+          }">
+            <span @click="activeIndex = 2">2</span> {{ steps[1].title }}</li>
+          <li :class="{
+            'steps-item active': activeIndex === 3,
+            'steps-item done': activeIndex > 3,
+            'steps-item': activeIndex < 3
+          }">
+            <span @click="activeIndex = 3">3</span> {{ steps[2].title }}</li>
+          <li :class="{
+            'steps-item active': activeIndex === 4,
+            'steps-item done': activeIndex > 4,
+            'steps-item': activeIndex < 4
+          }">
+            <span @click="activeIndex = 4">4</span> {{ steps[3].title }}</li>
+          <li :class="{
+            'steps-item active': activeIndex === 5,
+            'steps-item done': activeIndex > 5,
+            'steps-item': activeIndex < 5
+          }">
+            <span @click="activeIndex = 5">5</span> {{ steps[4].title }}</li>
+        </ul>
+        <div>
+          <button
+            class="btn"
+            :disabled="activeIndex == 1"
+            @click="activeIndex--"
+            :class="!status ? 'none' : ''"
+          >
+            Назад
+          </button>
+          <button
+            class="btn primary"
+            @click="activeIndex++"
+            v-if="activeIndex < 5"
+          >
+            Вперед
+          </button>
+          <button
+            class="btn primary"
+            @click="status = false"
+            v-else
+            :class="!status ? 'none' : ''"
+          >
+            Закончить
+          </button>
+          <button
+            @click="activeIndex = 1, status = true"
+            :class="!status ? 'block btn primary' : 'none'"
+          >
+            Начать занова
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="vue.js"></script>
+  </body>
+</html>
